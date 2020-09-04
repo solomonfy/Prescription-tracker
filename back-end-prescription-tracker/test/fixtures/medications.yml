@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  strength: MyString
+  imprint: MyString
+  frequency: MyString
+  time: MyString
+  precaution: MyString
+  image: MyString
+
+two:
+  name: MyString
+  strength: MyString
+  imprint: MyString
+  frequency: MyString
+  time: MyString
+  precaution: MyString
+  image: MyString
