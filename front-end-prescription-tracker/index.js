@@ -1,25 +1,27 @@
-var months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-var today = new Date();
-today.setTime(today.getTime());
+// var months = [
+//   "January",
+//   "February",
+//   "March",
+//   "April",
+//   "May",
+//   "June",
+//   "July",
+//   "August",
+//   "September",
+//   "October",
+//   "November",
+//   "December",
+// ];
+// var today = new Date();
+// today.setTime(today.getTime());
+// todayDateTag.innerHTML =
+// months[today.getMonth()] + " " + today.getDate() + ", " + today.getFullYear();
 
+// Display today's date
 const todayDateTag = document.getElementById("spanDate");
+todayDateTag.innerHTML = new Date().toLocaleDateString();
 
-todayDateTag.innerHTML =
-  months[today.getMonth()] + " " + today.getDate() + ", " + today.getFullYear();
-
+// Missed medications alert
 const divMissedMed = document.querySelector("div.missed-medications");
 
 if (7 > 3) {
@@ -75,7 +77,6 @@ fetchData();
 function renderAllPrescriptions(prescriptions) {
   for (const prescription of prescriptions) {
     dipslayPrescription(prescription);
-    // console.log(prescription.id);
   }
 }
 
@@ -89,10 +90,13 @@ function dipslayPrescription(prescription) {
   const medTimeSpan = document.createElement("span");
   medTimeSpan.className = "med-time";
 
-  // medNameP.innerText = prescription.medication.name + " " + prescription.medication.strength;
+  console.log(prescription);
+
   medNameP.innerText = prescription.medication.name + " ";
   medStrengthSpan.innerText = prescription.medication.strength + " ";
-  medTimeSpan.innerText = "2 PM";
+  // medTimeSpan.innerText = "2 PM";
+  medTimeSpan.innerText = prescription.time_to_take;
+  // medTimeSpan.innerText = prescription.time_to_take.toLocaleTimeString();
 
   const btnDiv = document.createElement("div");
   btnDiv.className = "list-item-menu";
@@ -142,3 +146,5 @@ function dipslayPrescription(prescription) {
     // console.log(prescription.medication);
   });
 }
+
+console.log(new Date().toLocaleTimeString());

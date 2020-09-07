@@ -22,9 +22,7 @@
 
         <img data-src="https://www.goodrx.com/blog/wp-content/uploads/2018/11/medicine-assortment-goodrx.png"
             width="200" height="150" alt="Medication Image" uk-img>
-        <span>
-            <h1>All my prescriptions</h1><br>
-        </span>
+        <h1>My prescriptions</h1><br>
         <p class="uk-text-meta">Keep track of all my daily prescriptions</p><br>
 
         <div class="missed-medications uk-width-1-1 uk-card uk-card-default uk-padding uk-margin-left uk-card"
@@ -36,27 +34,26 @@
 
     <main class="uk-grid uk-padding">
         <!-- The left DIV - list of medications to be taken -->
-        <div
-            class="medication-to-take uk-background-green uk-width-1-3 uk-card uk-card-default uk-padding uk-margin-left uk-card uk-card-hover">
+        <div style="margin-left: 100px;"
+            class="medication-to-take uk-background-green uk-width-1-3 uk-card uk-card-default uk-card uk-card-hover">
             <div class="uk-card-header">
                 <h3 class="uk-card-title">Medications to be taken on</h3>
                 <span id="spanDate"></span>
             </div>
             <div class="uk-card-body">
                 <h4>
-                    <p style="text-align: right;">Time</p>
+                    <p id="time-for-medication-p-tag" style="text-align: right;">Time</p>
                     <ul id="medication-list-ul" class="uk-list uk-list-striped"></ul>
                 </h4>
             </div>
 
-            <br /><br /><br />
+            <br /><br />
 
             <div id="add-prescription">
-                <a class="add-button" uk-icon="icon: plus-circle; ratio: 3.5" uk-tooltip=" Add new prescription"></a>
-
-
-                <!-- <a class="refresh-button" uk-icon="icon: refresh; ratio: 3.5"></a> -->
-            </div>
+                <a class="add-button" uk-icon="icon: plus-circle; ratio: 3.5" uk-tooltip="Add new prescription"></a>
+                <a style="float: right; margin-right: 30px;" class="refresh-button"
+                    uk-icon="icon: refresh; ratio: 3.5"></a>
+            </div><br />
         </div>
 
         <!-- The middle DIV - medication detail -->
