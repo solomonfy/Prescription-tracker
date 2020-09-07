@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Flatiron Calorie Counter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <header class="uk-padding uk-padding-remove-bottom">
+        <h1>Flatiron Calorie Counter</h1>
+        <p class="uk-text-meta">CRUD powered calorie tracker to keep track of all the crud you're eating.</p>
+    </header>
+
+    <main class="uk-grid uk-padding">
+
+
+
+
+
+
+
+        <!-- The right DIV containing features pertaining to calorie entries -->
+        <div class="uk-width-1-2 uk-card uk-card-default uk-padding uk-margin-left">
+
+            <p style="text-align: right;">Time to take on</p>
+            <ul id="calories-list" class="uk-list uk-list-striped">
+
+                <li class="calories-list-item">
+
+
+                    
+                    <div class="list-item-menu">
+                        <a class="check-button" uk-icon="icon: bell; ratio: 1.5"></a>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-1-1">
+                            <strong>400000000000000000000000000000000000000</strong>
+                            <span>kcal</span>
+                        </div>
+                        <div class="uk-width-4-7">
+                            <em class="uk-text-meta">Lorem ipsum dolores, some other filler text that I cannot rememeber
+                                the rest
+                                of...</em>
+                        </div>
+                    </div>
+                    <div class="list-item-menu">
+                        <a class="edit-button" uk-icon="icon: pencil" uk-toggle="target: #edit-form-container"></a>
+                        <a class="delete-button" uk-icon="icon: trash"></a>
+                    </div>
+
+
+                </li>
+
+
+
+
+            </ul>
+
+
+        </div>
+    </main>
+
+    <div id="edit-form-container" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <form id="edit-calorie-form">
+                <h3>Edit calorie intake:</h3>
+                <div>
+                    <div class="uk-margin-small">
+                        <input type="number" class="uk-input" min="0" placeholder="Calories (kcal)">
+                    </div>
+                    <div class="uk-margin-small">
+                        <textarea type="text" class="uk-textarea" placeholder="Notes" style="resize:none"></textarea>
+                    </div>
+                    <button class="uk-button uk-button-default">Update Entry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
