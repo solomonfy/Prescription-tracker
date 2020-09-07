@@ -14,12 +14,36 @@ var months = [
 ];
 var today = new Date();
 today.setTime(today.getTime());
+
 const todayDateTag = document.getElementById("spanDate");
 
 todayDateTag.innerHTML =
   months[today.getMonth()] + " " + today.getDate() + ", " + today.getFullYear();
 
+const divMissedMed = document.querySelector("div.missed-medications");
+
+if (7 > 3) {
+  const headerInnerDiv = document.createElement("div");
+
+  headerInnerDiv.innerHTML = `
+      <div class="uk-card-header">
+        <h3 class="uk-card-title" style="color: red;">Missed Medications</h3>
+      </div>
+      <div class="list-of-missed-medication uk-card-body">
+        <h4>
+          <ul id="missed-medication-ul" class="uk-list uk-list-striped"></ul>
+        </h4>
+      </div>`;
+  divMissedMed.append(headerInnerDiv);
+
+  const missedUl = document.querySelector("ul#missed-medication-ul");
+  const missedLi = document.createElement("li");
+  missedLi.innerText = "Missed med 1";
+  missedUl.append(missedLi);
+}
+
 const url = "http://localhost:3000/api/v1/prescriptions/";
+
 const addBtn = document.querySelector("a.add-button");
 const prescriptionFormContainer = document.getElementById(
   "prescription-form-container"
@@ -40,10 +64,6 @@ addBtn.addEventListener("click", () => {
 
   // fetch()
 });
-
-// refreshBtn.addEventListener("click", () => {
-//   medDetailDiv.innerHTML = "";
-// });
 
 function fetchData() {
   fetch(url)
@@ -82,9 +102,6 @@ function dipslayPrescription(prescription) {
   checkATag.innerHTML = `<a class="check-button" uk-icon="icon: bell; ratio: 2"></a>`;
 
   checkATag.addEventListener("click", () => {
-    var audio = new Audio("https://www.youtube.com/watch?v=M_aj6FbwbBs");
-    audio.play();
-
     console.log("Clicked");
   });
 
