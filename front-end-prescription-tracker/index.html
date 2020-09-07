@@ -42,7 +42,7 @@
             </div>
             <div class="uk-card-body">
                 <h4>
-                    <p id="time-for-medication-p-tag" style="text-align: right;">Time</p>
+                    <a id="time-for-medication-p-tag" class="uk-button uk-button-default">Time</a>
                     <ul id="medication-list-ul" class="uk-list uk-list-striped"></ul>
                 </h4>
             </div>
@@ -51,8 +51,6 @@
 
             <div id="add-prescription">
                 <a class="add-button" uk-icon="icon: plus-circle; ratio: 3.5" uk-tooltip="Add new prescription"></a>
-                <a style="float: right; margin-right: 30px;" class="refresh-button"
-                    uk-icon="icon: refresh; ratio: 3.5"></a>
             </div><br />
         </div>
 
@@ -60,10 +58,12 @@
         <div
             class="medication-detail uk-background-muted uk-width-1-4 uk-card uk-card-default uk-card-small uk-padding uk-margin-left uk-card uk-card-hover">
             <div class="uk-card-header">
-                <h3 class="uk-card-title">Medication detail</h3><br>
+                <h3 class="uk-card-title">Medication detail
+                    <a class="refresh-button" style="float: right; margin-right: 30px;"
+                        uk-icon="icon: refresh; ratio: 1.5"></a>
+                </h3>
             </div>
             <div class="uk-card-body">
-                <!-- <h3 id="medication">Sample</h3> -->
             </div>
         </div>
 
@@ -73,7 +73,7 @@
             <div class="uk-card-header">
                 <h3>Medications taken</h3>
             </div>
-            <ul></ul>
+            <ul class="taken-medication"></ul>
         </div>
     </main>
 

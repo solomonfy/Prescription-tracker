@@ -21,9 +21,21 @@
 const todayDateTag = document.getElementById("spanDate");
 todayDateTag.innerHTML = new Date().toLocaleDateString();
 
-// Missed medications alert
 const divMissedMed = document.querySelector("div.missed-medications");
+const url = "http://localhost:3000/api/v1/prescriptions/";
 
+const addBtn = document.querySelector("a.add-button");
+const prescriptionFormContainer = document.getElementById(
+  "prescription-form-container"
+);
+
+const medDetailDiv = document.querySelector(".medication-detail");
+const medUl = document.querySelector("ul#medication-list-ul");
+const refreshBtn = document.querySelector("a.refresh-button");
+const breakTag = document.createElement("br");
+addPrescription = false;
+
+// Missed medications alert
 if (7 > 3) {
   const headerInnerDiv = document.createElement("div");
 
@@ -43,18 +55,6 @@ if (7 > 3) {
   missedLi.innerText = "Missed med 1";
   missedUl.append(missedLi);
 }
-
-const url = "http://localhost:3000/api/v1/prescriptions/";
-
-const addBtn = document.querySelector("a.add-button");
-const prescriptionFormContainer = document.getElementById(
-  "prescription-form-container"
-);
-
-const medDetailDiv = document.querySelector(".medication-detail");
-const medUl = document.querySelector("ul#medication-list-ul");
-const refreshBtn = document.querySelector("a.refresh-button");
-addPrescription = false;
 
 addBtn.addEventListener("click", () => {
   addPrescription = !addPrescription;
@@ -90,23 +90,28 @@ function dipslayPrescription(prescription) {
   const medTimeSpan = document.createElement("span");
   medTimeSpan.className = "med-time";
 
-  console.log(prescription);
+  // console.log(prescription);
 
   medNameP.innerText = prescription.medication.name + " ";
   medStrengthSpan.innerText = prescription.medication.strength + " ";
-  // medTimeSpan.innerText = "2 PM";
   medTimeSpan.innerText = prescription.time_to_take;
-  // medTimeSpan.innerText = prescription.time_to_take.toLocaleTimeString();
 
   const btnDiv = document.createElement("div");
   btnDiv.className = "list-item-menu";
 
-  // check, delete and edit icons
-  const checkATag = document.createElement("a");
-  checkATag.innerHTML = `<a class="check-button" uk-icon="icon: bell; ratio: 2"></a>`;
+  // bell, delete and edit icons
+  const checkTag = document.createElement("a");
+  checkTag.innerHTML = `<a class="check-button" uk-icon="icon: bell; ratio: 2"></a>`;
 
-  checkATag.addEventListener("click", () => {
-    console.log("Clicked");
+  checkTag.addEventListener("click", () => {
+    const medTakenUl = document.querySelector("ul.taken-medication");
+    const medTakenLi = document.createElement("li");
+
+    medTakenUl.append(medTakenLi);
+
+    medLi.innerText = "";
+    // console.log(prescription.medication.name);
+    medTakenLi.innerText = prescription.medication.name;
   });
 
   const editATag = document.createElement("a");
@@ -115,8 +120,8 @@ function dipslayPrescription(prescription) {
   const deleteATag = document.createElement("a");
   deleteATag.innerHTML = `<a class="delete-button" uk-icon="icon: trash" uk-tooltip="Delete prescription"></a>`;
 
-  medNamDiv.append(medNameP, medStrengthSpan, medTimeSpan);
-  medLi.append(medNamDiv, checkATag, editATag, deleteATag);
+  medNamDiv.append(medNameP, medStrengthSpan, medTimeSpan, breakTag);
+  medLi.append(medNamDiv, checkTag, editATag, deleteATag);
 
   medNamDiv.addEventListener("click", () => {
     const containerDiv = document.createElement("div");
