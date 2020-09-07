@@ -1,0 +1,57 @@
+main>div {
+    border: 0.5px solid #DDD;
+    /* border: 0.3px solid #949292; */
+    border-radius: 10px;
+}
+
+header h1,
+header p {
+    margin: 0;
+}
+
+medication-to-take {
+    background-color: greenyellow;
+}
+
+#prescription-form-container {
+    padding: 1rem;
+    width: stretch;
+    height: auto;
+    display: none;
+    /* opacity: .8; */
+}
+
+main {
+    margin: auto;
+    align-content: center;
+    width: 100%;
+    background-color: rgb(153, 197, 214);
+}
+
+.edit-button {
+    width: 30px;
+    height: 30px;
+    float: right;
+}
+
+.delete-button {
+    width: 30px;
+    height: 30px;
+    float: right;
+}
+
+img.medication-image {
+    border-radius: 3px;
+}
+
+div.polaroid {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 50px;
+}
+
+.med-time {
+    float: right;
+    color: rgb(252, 122, 0);
+}
