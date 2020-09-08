@@ -1,5 +1,3 @@
-
-
 // Display today's date
 const todayDateTag = document.getElementById("spanDate");
 todayDateTag.innerHTML = new Date().toLocaleDateString();
@@ -41,28 +39,13 @@ function renderAllPrescriptions(prescriptions) {
   for (const prescription of prescriptions) {
     dipslayPrescription(prescription);
   }
-  allPrescriptions.push(prescriptions);
 }
 
-for (const element of allPrescriptions) {
-  console.log(allPrescriptions);
-}
+
+
+
 // Missed medications alert
-// console.log(parseInt(new Date().toLocaleTimeString()));
-
 if (3 > 2) {
-  for (const aPrescription in allPrescriptions) {
-    console.log(aPrescription)
-  }
-}
-
-if (
-  allPrescriptions.filter(
-    (prescription) =>
-    parseInt(prescription.time_to_take) <
-    parseInt(new Date().toLocaleHoureString())
-  )
-) {
   const headerInnerDiv = document.createElement("div");
 
   headerInnerDiv.innerHTML = `
@@ -78,12 +61,11 @@ if (
 
   const missedUl = document.querySelector("ul#missed-medication-ul");
   const missedLi = document.createElement("li");
-  missedLi.innerText = element
+  missedLi.innerText = "Missed med1"
   missedUl.append(missedLi);
 }
-// }
 
-// missedPrescription();
+
 
 function dipslayPrescription(prescription) {
   const medLi = document.createElement("li");
@@ -95,7 +77,11 @@ function dipslayPrescription(prescription) {
   const medTimeSpan = document.createElement("span");
   medTimeSpan.className = "med-time";
 
-  // console.log(prescription);
+  // condition to show the prescription on left div
+
+  if (2 > 1) {
+
+  }
 
   medNameP.innerText = prescription.medication.name + " ";
   medStrengthSpan.innerText = prescription.medication.strength + " ";
