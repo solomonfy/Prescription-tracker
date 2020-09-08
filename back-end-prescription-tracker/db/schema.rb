@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_09_04_185204) do
     t.string "unique_id"
     t.string "frequency"
     t.string "dose"
-    t.time "time_to_take"
+    t.string "time_to_take"
     t.date "date_prescribed"
     t.string "doctor_name"
     t.datetime "created_at", precision: 6, null: false

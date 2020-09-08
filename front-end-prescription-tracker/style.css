@@ -1,7 +1,12 @@
+body {
+    font-family: Chalkboard SE;
+}
+
 main>div {
     border: 0.5px solid #DDD;
     /* border: 0.3px solid #949292; */
     border-radius: 10px;
+    font-family: American Typewriter;
 }
 
 header h1,
@@ -26,6 +31,7 @@ main {
     align-content: center;
     width: 100%;
     background-color: rgb(153, 197, 214);
+    
 }
 
 .edit-button {
