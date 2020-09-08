@@ -1,21 +1,4 @@
-// var months = [
-//   "January",
-//   "February",
-//   "March",
-//   "April",
-//   "May",
-//   "June",
-//   "July",
-//   "August",
-//   "September",
-//   "October",
-//   "November",
-//   "December",
-// ];
-// var today = new Date();
-// today.setTime(today.getTime());
-// todayDateTag.innerHTML =
-// months[today.getMonth()] + " " + today.getDate() + ", " + today.getFullYear();
+
 
 // Display today's date
 const todayDateTag = document.getElementById("spanDate");
