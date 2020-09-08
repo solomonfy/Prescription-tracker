@@ -34,27 +34,7 @@ const medUl = document.querySelector("ul#medication-list-ul");
 const refreshBtn = document.querySelector("a.refresh-button");
 const breakTag = document.createElement("br");
 addPrescription = false;
-
-// Missed medications alert
-if (7 > 3) {
-  const headerInnerDiv = document.createElement("div");
-
-  headerInnerDiv.innerHTML = `
-      <div class="uk-card-header">
-        <h3 class="uk-card-title" style="color: red;">Missed Medications</h3>
-      </div>
-      <div class="list-of-missed-medication uk-card-body">
-        <h4>
-          <ul id="missed-medication-ul" class="uk-list uk-list-striped"></ul>
-        </h4>
-      </div>`;
-  divMissedMed.append(headerInnerDiv);
-
-  const missedUl = document.querySelector("ul#missed-medication-ul");
-  const missedLi = document.createElement("li");
-  missedLi.innerText = "Missed med 1";
-  missedUl.append(missedLi);
-}
+let allPrescriptions = [];
 
 addBtn.addEventListener("click", () => {
   addPrescription = !addPrescription;
@@ -78,7 +58,56 @@ function renderAllPrescriptions(prescriptions) {
   for (const prescription of prescriptions) {
     dipslayPrescription(prescription);
   }
+  allPrescriptions.push(prescriptions);
 }
+
+for (const element of allPrescriptions) {
+  console.log(allPrescriptions);
+}
+// Missed medications alert
+// console.log(parseInt(new Date().toLocaleTimeString()));
+
+// function missedPrescription() {
+//   allPrescriptions.forEach((element) => {
+//     console.log(allPrescriptions);
+
+//     console.log("Hello");
+//     if (
+//       parseInt(element.time_to_take) >
+//       parseInt(new Date().toLocaleHoureString())
+//     ) {
+//       console.log("Hello");
+//     }
+//   });
+
+//   if (
+//     allPrescriptions.filter(
+//       (prescription) =>
+//         parseInt(prescription.time_to_take) <
+//         parseInt(new Date().toLocaleHoureString())
+//     )
+//   ) {
+//     const headerInnerDiv = document.createElement("div");
+
+//     headerInnerDiv.innerHTML = `
+//       <div class="uk-card-header">
+//         <h3 class="uk-card-title" style="color: red;">Missed Medications</h3>
+//       </div>
+//       <div class="list-of-missed-medication uk-card-body">
+//         <h4>
+//           <ul id="missed-medication-ul" class="uk-list uk-list-striped"></ul>
+//         </h4>
+//       </div>`;
+//     divMissedMed.append(headerInnerDiv);
+
+//     const missedUl = document.querySelector("ul#missed-medication-ul");
+//     const missedLi = document.createElement("li");
+//     missedLi.innerText = "Missed med 1";
+//     missedUl.append(missedLi);
+//   }
+// }
+
+// missedPrescription();
 
 function dipslayPrescription(prescription) {
   const medLi = document.createElement("li");
@@ -152,4 +181,16 @@ function dipslayPrescription(prescription) {
   });
 }
 
-console.log(new Date().toLocaleTimeString());
+// console.log(new Date().toLocaleTimeString());
+
+fetch(
+  "https://api.fda.gov/drug/event.json?api_key=dBVRBWvYL7d2EcEhLyeg7z1gRzyAc7lda7besTux"
+);
+// .then((resp) => resp.json())
+// .then((data) => console.group(data.results));
+
+fetch(
+  "https://api.fda.gov/drug/event.json?api_key=dBVRBWvYL7d2EcEhLyeg7z1gRzyAc7lda7besTux"
+)
+  .then((resp) => resp.json())
+  .then((data) => console.group(data.results));
