@@ -67,44 +67,37 @@ for (const element of allPrescriptions) {
 // Missed medications alert
 // console.log(parseInt(new Date().toLocaleTimeString()));
 
-// function missedPrescription() {
-//   allPrescriptions.forEach((element) => {
-//     console.log(allPrescriptions);
+if (3 > 2) {
+  for (const aPrescription in allPrescriptions) {
+    console.log(aPrescription)
+  }
+}
 
-//     console.log("Hello");
-//     if (
-//       parseInt(element.time_to_take) >
-//       parseInt(new Date().toLocaleHoureString())
-//     ) {
-//       console.log("Hello");
-//     }
-//   });
+if (
+  allPrescriptions.filter(
+    (prescription) =>
+    parseInt(prescription.time_to_take) <
+    parseInt(new Date().toLocaleHoureString())
+  )
+) {
+  const headerInnerDiv = document.createElement("div");
 
-//   if (
-//     allPrescriptions.filter(
-//       (prescription) =>
-//         parseInt(prescription.time_to_take) <
-//         parseInt(new Date().toLocaleHoureString())
-//     )
-//   ) {
-//     const headerInnerDiv = document.createElement("div");
+  headerInnerDiv.innerHTML = `
+      <div class="uk-card-header">
+        <h3 class="uk-card-title" style="color: red;">Missed Medications</h3>
+      </div>
+      <div class="list-of-missed-medication uk-card-body">
+        <h4>
+          <ul id="missed-medication-ul" class="uk-list uk-list-striped"></ul>
+        </h4>
+      </div>`;
+  divMissedMed.append(headerInnerDiv);
 
-//     headerInnerDiv.innerHTML = `
-//       <div class="uk-card-header">
-//         <h3 class="uk-card-title" style="color: red;">Missed Medications</h3>
-//       </div>
-//       <div class="list-of-missed-medication uk-card-body">
-//         <h4>
-//           <ul id="missed-medication-ul" class="uk-list uk-list-striped"></ul>
-//         </h4>
-//       </div>`;
-//     divMissedMed.append(headerInnerDiv);
-
-//     const missedUl = document.querySelector("ul#missed-medication-ul");
-//     const missedLi = document.createElement("li");
-//     missedLi.innerText = "Missed med 1";
-//     missedUl.append(missedLi);
-//   }
+  const missedUl = document.querySelector("ul#missed-medication-ul");
+  const missedLi = document.createElement("li");
+  missedLi.innerText = element
+  missedUl.append(missedLi);
+}
 // }
 
 // missedPrescription();
@@ -182,15 +175,3 @@ function dipslayPrescription(prescription) {
 }
 
 // console.log(new Date().toLocaleTimeString());
-
-fetch(
-  "https://api.fda.gov/drug/event.json?api_key=dBVRBWvYL7d2EcEhLyeg7z1gRzyAc7lda7besTux"
-);
-// .then((resp) => resp.json())
-// .then((data) => console.group(data.results));
-
-fetch(
-  "https://api.fda.gov/drug/event.json?api_key=dBVRBWvYL7d2EcEhLyeg7z1gRzyAc7lda7besTux"
-)
-  .then((resp) => resp.json())
-  .then((data) => console.group(data.results));
