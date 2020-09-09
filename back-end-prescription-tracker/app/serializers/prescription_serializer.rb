@@ -1,6 +1,5 @@
 class PrescriptionSerializer < ActiveModel::Serializer
-  attributes :id, :unique_id, :frequency, :dose, :time_to_take, :date_prescribed, :doctor_name, :prescription_taken, :medication, :user
-  # attributes :id, :unique_id, :frequency, :dose, :time_to_take, :date_prescribed, :doctor_name, :medication
+  attributes :id, :user_id, :medication_name, :medication_imprint, :medication_strength, :medication_category, :medication_precaution, :medication_image, :unique_id, :frequency, :dose, :time_to_take, :date_prescribed, :doctor_name
+
   belongs_to :user
-  belongs_to :medication
 end

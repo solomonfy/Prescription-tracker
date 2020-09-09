@@ -12,30 +12,23 @@
 
 ActiveRecord::Schema.define(version: 2020_09_08_154128) do
 
-  create_table "medications", force: :cascade do |t|
-    t.string "name"
-    t.string "imprint"
-    t.string "strength"
-    t.string "category"
-    t.text "precaution"
-    t.string "image"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "prescriptions", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "medication_id", null: false
+    t.string "medication_name"
+    t.string "medication_imprint"
+    t.string "medication_strength"
+    t.string "medication_category"
+    t.text "medication_precaution"
+    t.string "medication_image"
     t.string "unique_id"
     t.string "frequency"
     t.string "dose"
-    t.time "time_to_take"
+    t.string "time_to_take"
     t.date "date_prescribed"
     t.string "doctor_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "prescription_taken", default: false
-    t.index ["medication_id"], name: "index_prescriptions_on_medication_id"
     t.index ["user_id"], name: "index_prescriptions_on_user_id"
   end
 
@@ -48,6 +41,5 @@ ActiveRecord::Schema.define(version: 2020_09_08_154128) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "prescriptions", "medications"
   add_foreign_key "prescriptions", "users"
 end
