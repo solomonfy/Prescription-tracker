@@ -9,6 +9,7 @@ const addBtn = document.querySelector("a.add-button");
 const prescriptionFormContainer = document.getElementById(
   "prescription-form-container"
 );
+const editPrescription = document.querySelector("#edit-prescription-container");
 
 const medDetailDiv = document.querySelector(".medication-detail");
 const medUl = document.querySelector("ul#medication-list-ul");
@@ -80,9 +81,6 @@ function displayPrescription(prescription) {
     medStrengthSpan.innerText = prescription.medication_strength + " ";
     medTimeSpan.innerText = prescription.time_to_take;
 
-    // const btnDiv = document.createElement("div");
-    // btnDiv.className = "list-item-menu";
-
     // bell, delete and edit icons
     const checkTag = document.createElement("a");
     checkTag.innerHTML = `<a class="check-button" uk-icon="icon: bell; ratio: 2"></a>`;
@@ -103,7 +101,35 @@ function displayPrescription(prescription) {
     });
 
     const editATag = document.createElement("a");
-    editATag.innerHTML = `<a class="edit-button" uk-icon="icon: pencil" uk-tooltip="Edit prescription"></a>`;
+    editATag.innerHTML = `<a class="edit-button" uk-icon="icon: pencil" uk-tooltip="Edit prescription" uk-toggle="target: #edit-prescription-container"></a>`;
+
+    editPrescription.addEventListener("submit", () => {
+      // debugger
+      let med_frequency = event.target[0].value;
+      let med_dose = event.target[1].value;
+      let med_time_to_take = event.target[2].value;
+
+      configObj = {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          frequency: med_frequency,
+          dose: med_dose,
+          time_to_take: med_time_to_take,
+        }),
+      };
+      fetch(url + prescription.id, configObj)
+        .then((resp) => resp.json())
+        .then((updatedPrescription) =>
+          dipslayPrescription(updatedPrescription)
+        );
+
+      editPrescription.reset();
+      event.preventDefault;
+    });
 
     const deleteATag = document.createElement("a");
     deleteATag.innerHTML = `<a class="delete-button" uk-icon="icon: trash" uk-tooltip="Delete prescription"></a>`;

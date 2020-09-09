@@ -59,8 +59,7 @@
             class="medication-detail uk-background-muted uk-width-1-4 uk-card uk-card-default uk-card-small uk-padding uk-margin-left uk-card uk-card-hover">
             <div class="uk-card-header">
                 <h3 class="uk-card-title">Medication detail
-                    <a class="refresh-button" style="float: right; margin-right: 30px;"
-                        uk-icon="icon: refresh; ratio: 1.5"></a>
+
                 </h3>
             </div>
             <div class="uk-card-body">
@@ -88,6 +87,8 @@
 
 
     </main>
+
+    <!-- Add new prescription form -->
 
     <div id="prescription-form-container">
         <form class="uk-form-stacked uk-form-horizontal">
@@ -198,25 +199,28 @@
         </form>
     </div>
 
-    <!-- <div id="edit-form-container" uk-modal>
+
+    <!-- Edit prescription form -->
+    <div id="edit-prescription-container" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
             <button class="uk-modal-close-default" type="button" uk-close></button>
-            <form id="edit-calorie-form">
-                <h3>Edit calorie intake:</h3>
+            <form id="edit-prescription-form">
+                <h4>Edit prescription:</h4>
                 <div>
-                    <div class="uk-margin-small">
-                        <input type="number" class="uk-input" min="0" placeholder="Calories (kcal)">
-                    </div>
-                    <div class="uk-margin-small">
-                        <textarea type="text" class="uk-textarea" placeholder="Notes" style="resize:none"></textarea>
-                    </div>
-                    <button class="uk-button uk-button-default">Update Entry</button>
+                    <div class="uk-margin-small medication-frequency">
+                        Frequency: <input type="text" class="uk-input" placeholder="once, twice daily...">
+                    </div><br>
+                    <div class="uk-margin-samll medication-dose">
+                        Dose: <input type="text" class="uk-input" placeholder="half, 1, 2 tablets...">
+                    </div><br>
+                    <div class="uk-margin-samll medication-time">
+                        To be taken on: <input type="text" class="uk-input" placeholder="6AM, 12PM, 10PM...">
+                    </div><br>
+                    <button class="uk-button uk-button-default">Update Prescription</button>
                 </div>
             </form>
         </div>
-    </div> -->
-
-    <!-- Add new prescription form -->
+    </div>
 
     <script src="index.js"></script>
 </body>
