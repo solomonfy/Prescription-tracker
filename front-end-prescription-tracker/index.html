@@ -165,34 +165,10 @@
             </div>
             <br />
 
-            <label class="uk-form-label" for="form-stacked-select">To be taken on</label>
+            <label class="uk-form-label" for="form-stacked-text">To be taken on</label>
             <div class="uk-form-controls">
-                <select class="uk-select uk-input uk-form-width-small" id="form-stacked-select">
-                    <option>6 AM</option>
-                    <option>7 AM</option>
-                    <option>8 AM</option>
-                    <option>9 AM</option>
-                    <option>10 AM</option>
-                    <option>11 AM</option>
-                    <option>12 PM</option>
-                    <option>1 PM</option>
-                    <option>2 PM</option>
-                    <option>3 PM</option>
-                    <option>4 PM</option>
-                    <option>5 PM</option>
-                    <option>6 PM</option>
-                    <option>7 PM</option>
-                    <option>8 PM</option>
-                    <option>9 PM</option>
-                    <option>10 PM</option>
-                    <option>11 PM</option>
-                    <option>12 AM</option>
-                    <option>1 AM</option>
-                    <option>2 AM</option>
-                    <option>3 AM</option>
-                    <option>4 AM</option>
-                    <option>5 AM</option>
-                </select>
+                <input class="uk-input uk-form-width-small" type="time" id="appt" name="appt" input.value="Prefilled!"
+                    placeholder="6AM, 12PM, 10PM..." required>
             </div>
             <br />
             <button class="uk-button uk-button-primary">Submit</button>
@@ -208,13 +184,18 @@
                 <h4>Edit prescription:</h4>
                 <div>
                     <div class="uk-margin-small medication-frequency">
-                        Frequency: <input type="text" class="uk-input" placeholder="once, twice daily...">
+                        Frequency: <input type="text" class="uk-input" input.value="Prefilled!"
+                            placeholder="once, twice daily...">
                     </div><br>
                     <div class="uk-margin-samll medication-dose">
-                        Dose: <input type="text" class="uk-input" placeholder="half, 1, 2 tablets...">
+                        Dose: <input type="text" class="uk-input" input.value="Prefilled!"
+                            placeholder="half, 1, 2 tablets...">
                     </div><br>
                     <div class="uk-margin-samll medication-time">
-                        To be taken on: <input type="text" class="uk-input" placeholder="6AM, 12PM, 10PM...">
+
+
+                        To be taken on: <input type="time" id="appt" name="appt" min="09:00" max="18:00" required
+                            class="uk-input uk-margin-small" input.value="Prefilled!" placeholder="6AM, 12PM, 10PM...">
                     </div><br>
                     <button class="uk-button uk-button-default">Update Prescription</button>
                 </div>

@@ -104,31 +104,42 @@ function displayPrescription(prescription) {
     editATag.innerHTML = `<a class="edit-button" uk-icon="icon: pencil" uk-tooltip="Edit prescription" uk-toggle="target: #edit-prescription-container"></a>`;
 
     editPrescription.addEventListener("submit", () => {
-      // debugger
+      // debugger;
+
       let med_frequency = event.target[0].value;
       let med_dose = event.target[1].value;
       let med_time_to_take = event.target[2].value;
 
-      configObj = {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          frequency: med_frequency,
-          dose: med_dose,
-          time_to_take: med_time_to_take,
-        }),
-      };
-      fetch(url + prescription.id, configObj)
-        .then((resp) => resp.json())
-        .then((updatedPrescription) =>
-          dipslayPrescription(updatedPrescription)
-        );
+      setTimeout(function () {
+        // add delay in loop
+        fetch(`${url}${prescription.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            frequency: med_frequency,
+            dose: med_dose,
+            time_to_take: med_time_to_take,
+          }),
+        })
+          .then((response) => response.json())
+          .then((prescription) => displayPrescription(prescription));
+      }, 100 * prescription.id);
 
-      editPrescription.reset();
-      event.preventDefault;
+      // configObj = {
+      //   method: "PATCH",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     frequency: med_frequency,
+      //     dose: med_dose,
+      //     time_to_take: med_time_to_take,
+      //   }),
+      // };
     });
 
     const deleteATag = document.createElement("a");
