@@ -46,7 +46,7 @@ class Api::V1::PrescriptionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def prescription_params
-      params.require(:prescription).permit(:user_id, :medication_id, :unique_id, :frequency, :dose, :time_to_take, :for_the_date, :doctor_name)
+      params.require(:prescription).permit(:user_id, :medication_id, :unique_id, :frequency, :dose, :time_to_take, :doctor_name, :prescription_taken)
     end
 
 end
