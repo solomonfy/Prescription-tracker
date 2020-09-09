@@ -13,12 +13,13 @@ class Api::V1::PrescriptionsController < ApplicationController
 
   def create
     # byebug
-    @prescription = Prescription.create(prescription_params)
+    @prescription = Prescription.create(prescription_params(:user_id, :medication_name, :medication_imprint, :medication_strength, :medication_category, :medication_precaution, :medication_image, :unique_id, :frequency, :dose, :time_to_take, :date_prescribed, :doctor_name, :prescription_taken))
     render json: @prescription
   end
 
   def update
-    @prescription.update(prescription_params)
+    # byebug
+    @prescription.update(prescription_params(:frequency, :dose, :time_to_take, :prescription_taken))
     render json: @prescription
   end
 
@@ -31,8 +32,8 @@ class Api::V1::PrescriptionsController < ApplicationController
       @prescription = Prescription.find(params[:id])
     end
 
-    def prescription_params
-      params.require(:prescription).permit(:user_id, :medication_name, :medication_imprint, :medication_strength, :medication_category, :medication_precaution, :medication_image, :unique_id, :frequency, :dose, :time_to_take, :date_prescribed, :doctor_name, :prescription_taken)
+    def prescription_params(*args)
+      params.require(:prescription).permit(*args)
     end
 
 end
