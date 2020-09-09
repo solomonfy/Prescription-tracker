@@ -26,7 +26,46 @@ addBtn.addEventListener("click", () => {
     prescriptionFormContainer.style.display = "none";
   }
 
-  // fetch()
+  // POST - add new prescription
+
+  prescriptionFormContainer.addEventListener("submit", () => {
+    event.preventDefault;
+
+    let medication_name = event.target[0].value;
+    let medication_strength = event.target[1].value;
+    let medication_imprint = event.target[2].value;
+    let medication_precaution = event.target[3].value;
+    let medication_category = event.target[4].value;
+    let medication_image = event.target[5].value;
+    let frequency = event.target[6].value;
+    let dose = event.target[7].value;
+    let time_to_take = event.target[8].value;
+
+    configObj = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: 1,
+        medication_name,
+        medication_strength,
+        medication_imprint,
+        medication_precaution,
+        medication_category,
+        medication_image,
+        frequency,
+        dose,
+        time_to_take,
+      }),
+    };
+    fetch(url, configObj)
+      .then((resp) => resp.json())
+      .then((newPrescription) => displayPrescription(newPrescription));
+
+    prescriptionFormContainer.reset();
+  });
 });
 
 fetchData();
@@ -234,44 +273,3 @@ function makeFalse(prescription) {
       .then((prescription) => displayPrescription(prescription));
   }, 100 * prescription.id);
 }
-
-// POST - add new prescription
-
-prescriptionFormContainer.addEventListener("submit", () => {
-  event.preventDefault;
-
-  let medication_name = event.target[0].value;
-  let medication_strength = event.target[1].value;
-  let medication_imprint = event.target[2].value;
-  let medication_precaution = event.target[3].value;
-  let medication_category = event.target[4].value;
-  let medication_image = event.target[5].value;
-  let frequency = event.target[6].value;
-  let dose = event.target[7].value;
-  let time_to_take = event.target[8].value;
-
-  configObj = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user_id: 1,
-      medication_name,
-      medication_strength,
-      medication_imprint,
-      medication_precaution,
-      medication_category,
-      medication_image,
-      frequency,
-      dose,
-      time_to_take,
-    }),
-  };
-  fetch(url, configObj)
-    .then((resp) => resp.json())
-    .then((newPrescription) => dipslayPrescription(newPrescription));
-
-  prescriptionFormContainer.reset();
-});
