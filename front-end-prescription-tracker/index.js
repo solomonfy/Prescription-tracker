@@ -36,13 +36,11 @@ function fetchData() {
     .then((data) => renderAllPrescriptions(data));
 }
 
-
 function renderAllPrescriptions(prescriptions) {
   for (const prescription of prescriptions) {
     displayPrescription(prescription);
   }
 }
-
 
 // Missed medications alert
 if (3 > 2) {
@@ -61,7 +59,7 @@ if (3 > 2) {
 
   const missedUl = document.querySelector("ul#missed-medication-ul");
   const missedLi = document.createElement("li");
-  missedLi.innerText = "Missed med1"
+  missedLi.innerText = "Missed med1";
   missedUl.append(missedLi);
 }
 
@@ -78,7 +76,6 @@ function displayPrescription(prescription) {
   // condition to show the prescription on "Medications to be taken on" or "Medication taken" side
 
   if (prescription.prescription_taken === false) {
-
     medNameP.innerText = prescription.medication_name + " ";
     medStrengthSpan.innerText = prescription.medication_strength + " ";
     medTimeSpan.innerText = prescription.time_to_take;
@@ -92,18 +89,18 @@ function displayPrescription(prescription) {
     checkTag.addEventListener("click", () => {
       medLi.innerHTML = "";
       fetch(`${url}${prescription.id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            prescription_taken: true
-          })
-        })
-        .then((response => response.json()))
-        .then((prescription) => displayPrescription(prescription))
-    })
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          prescription_taken: true,
+        }),
+      })
+        .then((response) => response.json())
+        .then((prescription) => displayPrescription(prescription));
+    });
 
     const editATag = document.createElement("a");
     editATag.innerHTML = `<a class="edit-button" uk-icon="icon: pencil" uk-tooltip="Edit prescription"></a>`;
@@ -114,17 +111,13 @@ function displayPrescription(prescription) {
     medNamDiv.append(medNameP, medStrengthSpan, medTimeSpan, breakTag);
     medLi.append(medNamDiv, checkTag, editATag, deleteATag);
 
-
     //-------------- end of if medication_taken === false
-
   } else {
-
     const medTakenUl = document.querySelector("ul.taken-medication");
     const medTakenLi = document.createElement("li");
 
     medTakenUl.append(medTakenLi);
     medTakenLi.innerText = prescription.medication_name;
-
   } //------------- end of if medication_taken === true
 
   //---- send all prescriptions to "Medications to be taken on" -----//
@@ -166,29 +159,69 @@ medReset.addEventListener("click", () => {
   medTakenUl.innerHTML = "";
   fetch(url)
     .then((response) => response.json())
-    .then((prescriptions) => updatePrescriptionTaken(prescriptions))
-})
-
+    .then((prescriptions) => updatePrescriptionTaken(prescriptions));
+});
 
 function updatePrescriptionTaken(prescriptions) {
-  prescriptions.forEach(prescription => makeFalse(prescription))
+  prescriptions.forEach((prescription) => makeFalse(prescription));
 }
-
 
 //--------- change "prescription_taken" to "false" --------------------//
 function makeFalse(prescription) {
-  setTimeout(function () { // add delay in loop
+  setTimeout(function () {
+    // add delay in loop
     fetch(`${url}${prescription.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          prescription_taken: false
-        })
-      })
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        prescription_taken: false,
+      }),
+    })
       .then((response) => response.json())
-      .then((prescription) => displayPrescription(prescription))
+      .then((prescription) => displayPrescription(prescription));
   }, 100 * prescription.id);
-};
+}
+
+// POST - add new prescription
+
+prescriptionFormContainer.addEventListener("submit", () => {
+  event.preventDefault;
+
+  let medication_name = event.target[0].value;
+  let medication_strength = event.target[1].value;
+  let medication_imprint = event.target[2].value;
+  let medication_precaution = event.target[3].value;
+  let medication_category = event.target[4].value;
+  let medication_image = event.target[5].value;
+  let frequency = event.target[6].value;
+  let dose = event.target[7].value;
+  let time_to_take = event.target[8].value;
+
+  configObj = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: 1,
+      medication_name,
+      medication_strength,
+      medication_imprint,
+      medication_precaution,
+      medication_category,
+      medication_image,
+      frequency,
+      dose,
+      time_to_take,
+    }),
+  };
+  fetch(url, configObj)
+    .then((resp) => resp.json())
+    .then((newPrescription) => dipslayPrescription(newPrescription));
+
+  prescriptionFormContainer.reset();
+});

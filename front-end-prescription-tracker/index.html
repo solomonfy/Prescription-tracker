@@ -72,20 +72,21 @@
             class="medication-taken uk-width-1-4 uk-card uk-card-default uk-padding uk-margin-left uk-card uk-card-hover">
             <div class="uk-card-header">
                 <h3>Medications taken</h3>
-            <br /><br />
+                <br /><br />
             </div>
             <ul class="taken-medication"></ul>
 
             <!-- -------- reset button ------------ -->
             <div id="reset-prescription">
-                <a class="reset-button" uk-icon="icon: refresh; ratio: 3.5" uk-tooltip="Move to Medications to be taken on"></a>
+                <a class="reset-button" uk-icon="icon: refresh; ratio: 3.5"
+                    uk-tooltip="Move to Medications to be taken on"></a>
             </div><br />
             <!-- ----------- end of reset button ------ -->
-      
+
         </div>
-        
-        
-        
+
+
+
     </main>
 
     <div id="prescription-form-container">
@@ -99,12 +100,46 @@
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Strength</label>
+                <label class="uk-form-label" for="form-stacked-text">Medication Strength</label>
                 <div class="uk-form-controls">
                     <input class="uk-input uk-input uk-form-width-medium" id="form-stacked-text" type="text"
-                        placeholder="medication strength..." />
+                        placeholder="strength..." />
                 </div>
             </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Medication Imprint</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input uk-input uk-form-width-medium" id="form-stacked-text" type="text"
+                        placeholder="medication imprint..." />
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Precautions</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input uk-input uk-form-width-medium" id="form-stacked-text" type="text"
+                        placeholder="precautions..." />
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Medication Category</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input uk-input uk-form-width-medium" id="form-stacked-text" type="text"
+                        placeholder="table, capsule, ..." />
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Medication Image</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input uk-input uk-form-width-medium" id="form-stacked-text" type="text"
+                        placeholder="url..." />
+                </div>
+            </div>
+
+
 
             <label class="uk-form-label" for="form-stacked-select">Frequency</label>
             <div class="uk-form-controls">
@@ -113,6 +148,7 @@
                     <option>Twice daily</option>
                     <option>Three times daily</option>
                     <option>Four times daily</option>
+                    <option>Once weekly</option>
                 </select>
             </div>
             <br />
