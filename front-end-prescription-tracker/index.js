@@ -104,6 +104,8 @@ function displayPrescription(prescription) {
     editATag.innerHTML = `<a class="edit-button" uk-icon="icon: pencil" uk-tooltip="Edit prescription" uk-toggle="target: #edit-prescription-container"></a>`;
 
     editPrescription.addEventListener("submit", () => {
+      document.querySelector("input.frequency").value = prescription.frequency;
+      document.querySelector("input.dose").value = prescription.dose;
       // debugger;
 
       let med_frequency = event.target[0].value;
@@ -180,9 +182,11 @@ function displayPrescription(prescription) {
     const medImage = document.createElement("img");
     medImage.className = "medication-image";
 
+    polaroidDiv.innerHTML = "";
+
     medNameTag.innerText =
       "Name: " +
-      prescription.medication_name.name +
+      prescription.medication_name +
       " " +
       prescription.medication_strength;
     medImprintTag.innerText = "Imprint: " + prescription.medication_imprint;

@@ -70,21 +70,15 @@
         <div
             class="medication-taken uk-width-1-4 uk-card uk-card-default uk-padding uk-margin-left uk-card uk-card-hover">
             <div class="uk-card-header">
-                <h3>Medications taken</h3>
-                <br /><br />
+                <h3>Medications taken
+                    <!-- -------- reset button ------------ -->
+                    <a id="reset-prescription" class="reset-button" uk-icon="icon: refresh; ratio: 1.5"
+                        uk-tooltip="Move to Medications to be taken on"></a></h3>
+                <!-- ----------- end of reset button ------ -->
             </div>
+
             <ul class="taken-medication"></ul>
-
-            <!-- -------- reset button ------------ -->
-            <div id="reset-prescription">
-                <a class="reset-button" uk-icon="icon: refresh; ratio: 3.5"
-                    uk-tooltip="Move to Medications to be taken on"></a>
-            </div><br />
-            <!-- ----------- end of reset button ------ -->
-
         </div>
-
-
 
     </main>
 
@@ -184,18 +178,16 @@
                 <h4>Edit prescription:</h4>
                 <div>
                     <div class="uk-margin-small medication-frequency">
-                        Frequency: <input type="text" class="uk-input" input.value="Prefilled!"
+                        Frequency: <input type="text" class="uk-input frequency" input.value="Prefilled!"
                             placeholder="once, twice daily...">
                     </div><br>
                     <div class="uk-margin-samll medication-dose">
-                        Dose: <input type="text" class="uk-input" input.value="Prefilled!"
-                            placeholder="half, 1, 2 tablets...">
+                        Dose: <input type="text" class="uk-input dose">
                     </div><br>
                     <div class="uk-margin-samll medication-time">
 
 
-                        To be taken on: <input type="time" id="appt" name="appt" min="09:00" max="18:00" required
-                            class="uk-input uk-margin-small" input.value="Prefilled!" placeholder="6AM, 12PM, 10PM...">
+                        To be taken on: <input type="time" id="appt" class="uk-input uk-margin-small" required>
                     </div><br>
                     <button class="uk-button uk-button-default">Update Prescription</button>
                 </div>
