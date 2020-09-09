@@ -1,5 +1,3 @@
-
-
 // Display today's date
 const todayDateTag = document.getElementById("spanDate");
 todayDateTag.innerHTML = new Date().toLocaleDateString();
@@ -30,39 +28,24 @@ addBtn.addEventListener("click", () => {
   // fetch()
 });
 
+fetchData();
+
 function fetchData() {
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => renderAllPrescriptions(data));
 }
-fetchData();
+
 
 function renderAllPrescriptions(prescriptions) {
   for (const prescription of prescriptions) {
     dipslayPrescription(prescription);
   }
-  allPrescriptions.push(prescriptions);
 }
 
-for (const element of allPrescriptions) {
-  console.log(allPrescriptions);
-}
+
 // Missed medications alert
-// console.log(parseInt(new Date().toLocaleTimeString()));
-
 if (3 > 2) {
-  for (const aPrescription in allPrescriptions) {
-    console.log(aPrescription)
-  }
-}
-
-if (
-  allPrescriptions.filter(
-    (prescription) =>
-    parseInt(prescription.time_to_take) <
-    parseInt(new Date().toLocaleHoureString())
-  )
-) {
   const headerInnerDiv = document.createElement("div");
 
   headerInnerDiv.innerHTML = `
@@ -78,12 +61,9 @@ if (
 
   const missedUl = document.querySelector("ul#missed-medication-ul");
   const missedLi = document.createElement("li");
-  missedLi.innerText = element
+  missedLi.innerText = "Missed med1"
   missedUl.append(missedLi);
 }
-// }
-
-// missedPrescription();
 
 function dipslayPrescription(prescription) {
   const medLi = document.createElement("li");
@@ -95,39 +75,60 @@ function dipslayPrescription(prescription) {
   const medTimeSpan = document.createElement("span");
   medTimeSpan.className = "med-time";
 
-  // console.log(prescription);
+  // condition to show the prescription on "Medications to be taken on" or "Medication taken" side
 
-  medNameP.innerText = prescription.medication.name + " ";
-  medStrengthSpan.innerText = prescription.medication.strength + " ";
-  medTimeSpan.innerText = prescription.time_to_take;
+  if (prescription.prescription_taken === false) {
+    
+    medNameP.innerText = prescription.medication.name + " ";
+    medStrengthSpan.innerText = prescription.medication.strength + " ";
+    medTimeSpan.innerText = prescription.time_to_take;
+    
+    const btnDiv = document.createElement("div");
+    btnDiv.className = "list-item-menu";
+    
+    // bell, delete and edit icons
+    const checkTag = document.createElement("a");
+    checkTag.innerHTML = `<a class="check-button" uk-icon="icon: bell; ratio: 2"></a>`;
+      checkTag.addEventListener("click", () => {
+        medLi.innerHTML = "";
+        fetch(`${url}${prescription.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            prescription_taken: true
+          })
+        })
+        .then((response => response.json()))
+        .then((prescription) => dipslayPrescription(prescription))
+      })
+ 
+    const editATag = document.createElement("a");
+    editATag.innerHTML = `<a class="edit-button" uk-icon="icon: pencil" uk-tooltip="Edit prescription"></a>`;
+    
+    const deleteATag = document.createElement("a");
+    deleteATag.innerHTML = `<a class="delete-button" uk-icon="icon: trash" uk-tooltip="Delete prescription"></a>`;
+    
+    medNamDiv.append(medNameP, medStrengthSpan, medTimeSpan, breakTag);
+    medLi.append(medNamDiv, checkTag, editATag, deleteATag);
 
-  const btnDiv = document.createElement("div");
-  btnDiv.className = "list-item-menu";
+    
+    //-------------- end of if medication_taken === false
 
-  // bell, delete and edit icons
-  const checkTag = document.createElement("a");
-  checkTag.innerHTML = `<a class="check-button" uk-icon="icon: bell; ratio: 2"></a>`;
+  } else {
 
-  checkTag.addEventListener("click", () => {
     const medTakenUl = document.querySelector("ul.taken-medication");
     const medTakenLi = document.createElement("li");
-
+            
     medTakenUl.append(medTakenLi);
-
-    medLi.innerText = "";
-    // console.log(prescription.medication.name);
     medTakenLi.innerText = prescription.medication.name;
-  });
 
-  const editATag = document.createElement("a");
-  editATag.innerHTML = `<a class="edit-button" uk-icon="icon: pencil" uk-tooltip="Edit prescription"></a>`;
+  }  //------------- end of if medication_taken === true
 
-  const deleteATag = document.createElement("a");
-  deleteATag.innerHTML = `<a class="delete-button" uk-icon="icon: trash" uk-tooltip="Delete prescription"></a>`;
-
-  medNamDiv.append(medNameP, medStrengthSpan, medTimeSpan, breakTag);
-  medLi.append(medNamDiv, checkTag, editATag, deleteATag);
-
+     //---- send all prescriptions to "Medications to be taken on" -----//
+     
   medNamDiv.addEventListener("click", () => {
     const containerDiv = document.createElement("div");
     containerDiv.innerHTML = "";
@@ -156,5 +157,42 @@ function dipslayPrescription(prescription) {
     // console.log(prescription.medication);
   });
 }
+
+const medReset = document.querySelector("a.reset-button");
+
+medReset.addEventListener("click", () => {
+  medUl.innerHTML = "";
+  const medTakenUl = document.querySelector("ul.taken-medication");
+  medTakenUl.innerHTML = "";
+  fetch(url)
+    .then((response) => response.json())
+    .then((prescriptions) => updatePrescriptionTaken(prescriptions))
+})
+  
+  
+function updatePrescriptionTaken(prescriptions) {
+  prescriptions.forEach(prescription => makeFalse(prescription)) 
+}
+
+
+//--------- change "prescription_taken" to "false" --------------------//
+function makeFalse(prescription) {
+  setTimeout(function() {                  // add delay in loop
+    fetch(`${url}${prescription.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        prescription_taken: false
+      })
+    })
+      .then((response) => response.json())
+      .then((prescription) => dipslayPrescription(prescription))
+  }, 100 * prescription.id);
+};
+
+
 
 // console.log(new Date().toLocaleTimeString());
