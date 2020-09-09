@@ -32,7 +32,7 @@ class Api::V1::PrescriptionsController < ApplicationController
     end
 
     def prescription_params
-      params.require(:prescription).permit(:user_id, :medication_name, :medication_imprint, :medication_strength, :medication_category, :medication_precaution, :medication_image, :unique_id, :frequency, :dose, :time_to_take, :date_prescribed, :doctor_name)
+      params.require(:prescription).permit(:user_id, :medication_name, :medication_imprint, :medication_strength, :medication_category, :medication_precaution, :medication_image, :unique_id, :frequency, :dose, :time_to_take, :date_prescribed, :doctor_name, :prescription_taken)
     end
 
 end
