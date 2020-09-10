@@ -273,6 +273,12 @@ function displayPrescription(prescription) {
     );
     // containerDiv.append(medNameTag, medImprintTag, medImage, medPrecauTag);
   });
+
+  if (allMedListDiv.childElementCount === 0) {
+    wellDoneTag.style.display = "block"
+    wellDoneTag.innerText = "You are done for today's medication"
+  }
+
 }
 
 const medReset = document.querySelector("a.reset-button");
