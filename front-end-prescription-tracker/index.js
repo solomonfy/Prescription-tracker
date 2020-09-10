@@ -33,7 +33,8 @@ const medUl = document.querySelector("ul#medication-list-ul");
 const refreshBtn = document.querySelector("a.refresh-button");
 const breakTag = document.createElement("br");
 addPrescription = false;
-let allPrescriptions = [];
+const wellDoneTag = document.querySelector("div.done-for-today")
+// let allPrescriptions = [];
 
 addBtn.addEventListener("click", () => {
   addPrescription = !addPrescription;
@@ -223,6 +224,10 @@ function displayPrescription(prescription) {
     const h3 = document.createElement("h3");
     const medTakenLi = document.createElement("li");
     medTakenLi.className = "uk-text-success"
+
+    wellDoneTag.style.display = "block"
+    wellDoneTag.innerText = "You are done for today's medication"
+
 
     medTakenUl.append(medTakenLi);
     // medTakenUl.append(h3);
