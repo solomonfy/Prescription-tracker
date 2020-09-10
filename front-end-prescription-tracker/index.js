@@ -87,6 +87,9 @@ fetchData();
 let fetchTime = setInterval(fetchData, 60000);
 
 function fetchData() {
+  medUl.innerHTML = "";
+  const medTakenUl = document.querySelector("ul.taken-medication");
+  medTakenUl.innerHTML = "";
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => renderAllPrescriptions(data));
