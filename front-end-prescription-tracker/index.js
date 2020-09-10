@@ -187,8 +187,6 @@ function displayPrescription(prescription) {
     deleteATag.innerHTML = `<a class="delete-button" uk-icon="icon: trash" uk-tooltip="Delete prescription"></a>`;
 
     deleteATag.addEventListener("click", () => {
-      console.log("Clicked");
-
       fetch(url + prescription.id, {
         method: "DELETE",
       });
@@ -216,27 +214,25 @@ function displayPrescription(prescription) {
     const polaroidDiv = document.createElement("div");
     polaroidDiv.className = "polaroid";
 
-    const medNameTag = document.createElement("h3");
-    const medImprintTag = document.createElement("h3");
-    const medImage = document.createElement("img");
-    medImage.className = "medication-image";
-
+    containerDiv.append(polaroidDiv);
     polaroidDiv.innerHTML = "";
 
+    const medNameTag = document.createElement("h2");
+    const medImprintTag = document.createElement("h2");
+    const medImage = document.createElement("img");
+    medImage.className = "medication-image";
+    const medPrecauTag = document.createElement("h2");
+
     medNameTag.innerText =
-      "Name: " +
-      prescription.medication_name +
-      " " +
-      prescription.medication_strength;
-    medImprintTag.innerText = "Imprint: " + prescription.medication_imprint;
+      prescription.medication_name + " " + prescription.medication_strength;
+    medImprintTag.innerText = prescription.medication_imprint;
 
     medImage.src = prescription.medication_image;
+    medPrecauTag.innerText = prescription.medication_precaution;
 
-    polaroidDiv.append(medImage, medImprintTag, medNameTag);
-    containerDiv.append(polaroidDiv);
-    // containerDiv.append(medNameTag, medImprintTag, medImage);
+    polaroidDiv.append(medImage, medImprintTag, medNameTag, medPrecauTag);
+    // containerDiv.append(medNameTag, medImprintTag, medImage, medPrecauTag);
     medDetailDiv.append(containerDiv);
-    // console.log(prescription.medication);
   });
 }
 

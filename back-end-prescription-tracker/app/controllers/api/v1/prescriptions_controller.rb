@@ -19,7 +19,7 @@ class Api::V1::PrescriptionsController < ApplicationController
 
   def update
     # byebug
-    @prescription.update(prescription_params(:frequency, :dose, :time_to_take, :prescription_taken))
+    @prescription.update(prescription_params(:medication_imprint, :frequency, :dose, :time_to_take, :prescription_taken, :medication_strength, :medication_category, :medication_precaution, :medication_image))
     render json: @prescription
   end
 
