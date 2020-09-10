@@ -84,6 +84,7 @@ addBtn.addEventListener("click", () => {
 });
 
 fetchData();
+let fetchTime = setInterval(fetchData, 60000);
 
 function fetchData() {
   fetch(url)
@@ -97,29 +98,29 @@ function renderAllPrescriptions(prescriptions) {
   }
 }
 
-// Missed medications alert
-if (3 > 2) {
-  const headerInnerDiv = document.createElement("div");
 
-  headerInnerDiv.innerHTML = `
-      <div class="uk-card-header">
-        <h3 class="uk-card-title" style="color: red;">Missed Medications</h3>
-      </div>
-      <div class="list-of-missed-medication uk-card-body">
-        <h4>
-          <ul id="missed-medication-ul" class="uk-list uk-list-striped"></ul>
-        </h4>
-      </div>`;
-  divMissedMed.append(headerInnerDiv);
-
-  const missedUl = document.querySelector("ul#missed-medication-ul");
-  const missedLi = document.createElement("li");
-  missedLi.innerText = "Missed med1";
-  missedUl.append(missedLi);
-}
 
 function displayPrescription(prescription) {
   const medLi = document.createElement("li");
+
+  // Missed medications alert
+
+  let currentHour = new Date().getHours();
+  let currentMinutes = new Date().getMinutes();
+  let currentHourMin = `${currentHour}:${currentMinutes}`;
+
+  let medTime = timeToDecimal(prescription.time_to_take);
+  let currHourMin = timeToDecimal(currentHourMin);
+
+  function timeToDecimal(t) {
+    var arr = t.split(":");
+    var dec = parseInt((arr[1] / 6) * 10, 10);
+    return parseFloat(parseInt(arr[0], 10) + "." + (dec < 10 ? "0" : "" + dec));
+  }
+
+  if (medTime < currHourMin) {
+    medLi.className = "uk-alert-danger";
+  }
   medUl.append(medLi);
 
   const medNamDiv = document.createElement("div");
