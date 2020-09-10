@@ -2,6 +2,13 @@
 const todayDateTag = document.getElementById("spanDate");
 todayDateTag.innerHTML = new Date().toLocaleDateString();
 
+const todayTimeTag = document.getElementById("currentTime");
+let currentTime = setInterval(timer, 1000);
+
+function timer() {
+  todayTimeTag.innerHTML = new Date().toLocaleTimeString();
+}
+
 const divMissedMed = document.querySelector("div.missed-medications");
 const url = "http://localhost:3000/api/v1/prescriptions/";
 
@@ -134,15 +141,15 @@ function displayPrescription(prescription) {
     checkTag.addEventListener("click", () => {
       medLi.innerHTML = "";
       fetch(`${url}${prescription.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          prescription_taken: true,
-        }),
-      })
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            prescription_taken: true,
+          }),
+        })
         .then((response) => response.json())
         .then((prescription) => displayPrescription(prescription));
     });
@@ -284,15 +291,15 @@ function makeFalse(prescription) {
   setTimeout(function () {
     // add delay in loop
     fetch(`${url}${prescription.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        prescription_taken: false,
-      }),
-    })
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          prescription_taken: false,
+        }),
+      })
       .then((response) => response.json())
       .then((prescription) => displayPrescription(prescription));
   }, 100 * prescription.id);
