@@ -141,7 +141,7 @@ function displayPrescription(prescription) {
 
     // bell, delete and edit icons
     const checkTag = document.createElement("a");
-    checkTag.innerHTML = `<a class="check-button" uk-icon="icon: bell; ratio: 2"></a>`;
+    checkTag.innerHTML = `<a class="check-button" uk-icon="icon: unlock; ratio: 2"></a>`;
     checkTag.addEventListener("click", () => {
       medLi.innerHTML = "";
       fetch(`${url}${prescription.id}`, {
@@ -220,6 +220,7 @@ function displayPrescription(prescription) {
     const medTakenUl = document.querySelector("ul.taken-medication");
     const h3 = document.createElement("h3");
     const medTakenLi = document.createElement("li");
+    medTakenLi.className = "uk-text-success"
 
     medTakenUl.append(medTakenLi);
     // medTakenUl.append(h3);
