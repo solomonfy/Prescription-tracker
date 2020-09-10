@@ -14,10 +14,9 @@ const editPrescriptionForm = document.querySelector(
   "form#edit-prescription-form"
 );
 
-//create hidden Id field for the form
+//create hidden Id field for edit form
 let hiddenId = document.createElement("input");
 hiddenId.setAttribute("type", "hidden");
-hiddenId.setAttribute("name", "prescriptionId");
 editPrescriptionForm.append(hiddenId);
 
 const medDetailDiv = document.querySelector(".medication-detail");
@@ -150,19 +149,18 @@ function displayPrescription(prescription) {
 
     const editATag = document.createElement("a");
     editATag.innerHTML = `<a class="edit-button" uk-icon="icon: pencil" uk-tooltip="Edit prescription" uk-toggle="target: #edit-prescription-container"></a>`;
-    // editATag.innerHTML = `<a class="edit-button" uk-icon="icon: pencil" uk-tooltip="Edit prescription"></a>`;
 
     //click on edit button to populate form
     editATag.addEventListener("click", () => {
       editPrescriptionForm.children[0].value = prescription.frequency;
       editPrescriptionForm.children[1].value = prescription.dose;
       editPrescriptionForm.children[2].value = prescription.time_to_take;
-      hiddenId = prescription.id;
-      // debugger;
+      // hiddenId = prescription.id;
 
       // edit prescription
       document.querySelector("input.frequency").value = prescription.frequency;
       document.querySelector("input.dose").value = prescription.dose;
+      document.querySelector("input.time").value = prescription.time_to_take;
 
       editPrescriptionForm.addEventListener("submit", () => {
         // event.preventDefault();
@@ -209,10 +207,14 @@ function displayPrescription(prescription) {
     //-------------- end of if medication_taken === false
   } else {
     const medTakenUl = document.querySelector("ul.taken-medication");
+    const h3 = document.createElement("h3");
     const medTakenLi = document.createElement("li");
 
     medTakenUl.append(medTakenLi);
-    medTakenLi.innerText = prescription.medication_name;
+    // medTakenUl.append(h3);
+    // h3.append(medTakenLi);
+    medTakenLi.innerText =
+      prescription.medication_name + " " + prescription.medication_strength;
   } //------------- end of if medication_taken === true
 
   //---- send all prescriptions to "Medications to be taken on" -----//
@@ -227,13 +229,14 @@ function displayPrescription(prescription) {
     polaroidDiv.className = "polaroid";
 
     containerDiv.append(polaroidDiv);
-    // polaroidDiv.innerHTML = "";
+    polaroidDiv.innerHTML = "";
 
     const medNameTag = document.createElement("h2");
     const medImprintTag = document.createElement("h2");
     const medImage = document.createElement("img");
     medImage.className = "medication-image";
     const medPrecauTag = document.createElement("h2");
+    const medFrequencyAndDoseTag = document.createElement("h2");
 
     medNameTag.innerText =
       prescription.medication_name + " " + prescription.medication_strength;
@@ -242,7 +245,21 @@ function displayPrescription(prescription) {
     medImage.src = prescription.medication_image;
     medPrecauTag.innerText = prescription.medication_precaution;
 
-    polaroidDiv.append(medImage, medImprintTag, medNameTag, medPrecauTag);
+    medFrequencyAndDoseTag.innerText =
+      "You should take this medication " +
+      prescription.dose +
+      " " +
+      prescription.medication_category +
+      " " +
+      prescription.frequency;
+
+    polaroidDiv.append(
+      medImage,
+      medImprintTag,
+      medNameTag,
+      medPrecauTag,
+      medFrequencyAndDoseTag
+    );
     // containerDiv.append(medNameTag, medImprintTag, medImage, medPrecauTag);
   });
 }
@@ -280,35 +297,3 @@ function makeFalse(prescription) {
       .then((prescription) => displayPrescription(prescription));
   }, 100 * prescription.id);
 }
-
-// // edit prescription
-
-// editPrescriptionForm.addEventListener("submit", () => {
-//   // document.querySelector("input.frequency").value = prescription.frequency;
-//   // document.querySelector("input.dose").value = prescription.dose;
-//   // debugger;
-//   event.preventDefault();
-
-//   let med_frequency = event.target[0].value;
-//   let med_dose = event.target[1].value;
-//   let med_time_to_take = event.target[2].value;
-
-//   configObj = {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       frequency: med_frequency,
-//       dose: med_dose,
-//       time_to_take: med_time_to_take,
-//     }),
-//   };
-
-//   setTimeout(function () {
-//     // add delay in loop
-//     fetch(url + hiddenId.value, configObj)
-//       .then((resp) => resp.json())
-//       .then((data) => console.log(data));
-//   }, 100 * hiddenId.value);
-// });
