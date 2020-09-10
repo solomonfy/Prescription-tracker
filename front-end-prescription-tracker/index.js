@@ -27,6 +27,8 @@ hiddenId.setAttribute("type", "hidden");
 editPrescriptionForm.append(hiddenId);
 
 const medDetailDiv = document.querySelector(".medication-detail");
+const medDiv = document.querySelector("div#medication-detail")
+console.log(medDiv)
 const medUl = document.querySelector("ul#medication-list-ul");
 const refreshBtn = document.querySelector("a.refresh-button");
 const breakTag = document.createElement("br");
@@ -231,16 +233,21 @@ function displayPrescription(prescription) {
   //---- send all prescriptions to "Medications to be taken on" -----//
 
   const containerDiv = document.createElement("div");
-  medDetailDiv.append(containerDiv);
-
+  
   medNamDiv.addEventListener("click", () => {
+    
+    medDiv.innerHTML = "";
+    medDiv.append(containerDiv);
     containerDiv.innerHTML = "";
-
     const polaroidDiv = document.createElement("div");
-    polaroidDiv.className = "polaroid";
+    // polaroidDiv.className = "polaroid";
+    polaroidDiv.classList.add("polaroid", "uk-alert");
+    // polaroidDiv.innerHTML = polaroidDiv.innerHTML + uk-alert
+
+    // polaroidDiv.innerHTML = ` uk-alert=""`;
 
     containerDiv.append(polaroidDiv);
-    polaroidDiv.innerHTML = "";
+    // polaroidDiv.innerHTML = "";
 
     const medNameTag = document.createElement("h2");
     const medImprintTag = document.createElement("h2");
