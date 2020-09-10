@@ -61,3 +61,8 @@ div.polaroid {
     float: right;
     color: rgb(252, 122, 0);
 }
+
+mark { 
+    background-color: yellow;
+    color: black;
+  }

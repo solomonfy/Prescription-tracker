@@ -2,6 +2,13 @@
 const todayDateTag = document.getElementById("spanDate");
 todayDateTag.innerHTML = new Date().toLocaleDateString();
 
+const todayTimeTag = document.getElementById("currentTime");
+  let currentTime = setInterval(timer, 1000);
+
+  function timer() {
+    todayTimeTag.innerHTML = new Date().toLocaleTimeString();
+  }
+
 const divMissedMed = document.querySelector("div.missed-medications");
 const url = "http://localhost:3000/api/v1/prescriptions/";
 
@@ -29,9 +36,14 @@ addBtn.addEventListener("click", () => {
   // fetch()
 });
 
+
 fetchData();
+let fetchTime = setInterval(fetchData, 60000);
 
 function fetchData() {
+  medUl.innerHTML = "";
+  const medTakenUl = document.querySelector("ul.taken-medication");
+  medTakenUl.innerHTML = "";
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => renderAllPrescriptions(data));
@@ -44,28 +56,46 @@ function renderAllPrescriptions(prescriptions) {
 }
 
 // Missed medications alert
-if (3 > 2) {
-  const headerInnerDiv = document.createElement("div");
+      // if (3 > 2) {
+      //   const headerInnerDiv = document.createElement("div");
 
-  headerInnerDiv.innerHTML = `
-      <div class="uk-card-header">
-        <h3 class="uk-card-title" style="color: red;">Missed Medications</h3>
-      </div>
-      <div class="list-of-missed-medication uk-card-body">
-        <h4>
-          <ul id="missed-medication-ul" class="uk-list uk-list-striped"></ul>
-        </h4>
-      </div>`;
-  divMissedMed.append(headerInnerDiv);
+      //   headerInnerDiv.innerHTML = `
+      //       <div class="uk-card-header">
+      //         <h3 class="uk-card-title" style="color: red;">Missed Medications</h3>
+      //       </div>
+      //       <div class="list-of-missed-medication uk-card-body">
+      //         <h4>
+      //           <ul id="missed-medication-ul" class="uk-list uk-list-striped"></ul>
+      //         </h4>
+      //       </div>`;
+      //   divMissedMed.append(headerInnerDiv);
 
-  const missedUl = document.querySelector("ul#missed-medication-ul");
-  const missedLi = document.createElement("li");
-  missedLi.innerText = "Missed med1";
-  missedUl.append(missedLi);
-}
+      //   const missedUl = document.querySelector("ul#missed-medication-ul");
+      //   const missedLi = document.createElement("li");
+      //   missedLi.innerText = "Missed med1";
+      //   missedUl.append(missedLi);
+      // }
 
 function displayPrescription(prescription) {
   const medLi = document.createElement("li");
+    
+    let currentHour = new Date().getHours();
+    let currentMinutes = new Date().getMinutes();
+    let currentHourMin = `${currentHour}:${currentMinutes}`
+    
+    let medTime = timeToDecimal(prescription.time_to_take);
+    let currHourMin = timeToDecimal(currentHourMin);
+
+      function timeToDecimal(t) {
+        var arr = t.split(":");
+        var dec = parseInt((arr[1]/6) * 10, 10);
+        return parseFloat(parseInt(arr[0], 10) + "." + (dec < 10 ? "0" : "" + dec ))
+      }   
+    
+    if(medTime < currHourMin) {
+      medLi.className = "uk-alert-danger"
+    }
+  
   medUl.append(medLi);
 
   const medNamDiv = document.createElement("div");
@@ -73,6 +103,7 @@ function displayPrescription(prescription) {
   const medStrengthSpan = document.createElement("span");
   const medTimeSpan = document.createElement("span");
   medTimeSpan.className = "med-time";
+
 
   // condition to show the prescription on "Medications to be taken on" or "Medication taken" side
 
@@ -219,6 +250,18 @@ function makeFalse(prescription) {
       .then((prescription) => displayPrescription(prescription));
   }, 100 * prescription.id);
 }
+
+
+// const todayTimeTag = document.getElementById("currentTime");
+//   let currentTime = setInterval(timer, 1000);
+
+//   function timer() {
+//     todayTimeTag.innerHTML = new Date().toLocaleTimeString();
+//   }
+
+
+
+
 
 // POST - add new prescription
 
