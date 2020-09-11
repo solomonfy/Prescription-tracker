@@ -72,3 +72,25 @@ div.polaroid {
 #close-btn {
     float: right;
 }
+
+#currentTime {
+    font-weight: 900;
+    font-size: 120%;
+    float: right;
+    color: green;
+}
+
+#time-for-medication-p-tag {
+    float: right;
+    font-family: American Typewriter;
+}
+
+.done-for-today {
+    color: green;
+    font-size: 200%;
+}
+
+#pill-identifier {
+    float: right;
+    margin-right: 10px;
+}

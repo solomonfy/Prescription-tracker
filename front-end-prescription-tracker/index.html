@@ -49,20 +49,20 @@
         <div class="uk-card-header">
           <h3 class="uk-card-title">Medications to be taken on</h3>
           <span id="spanDate"></span>
-          <h3 class="uk-card-title">Current time</h3>
+          <!-- <h3 class="uk-card-title" style="float: right">Current time</h3> -->
           <!-- add current time -->
           <span id="currentTime"></span>
         </div>
         <div class="uk-card-body">
           <a id="time-for-medication-p-tag" class="uk-button uk-button-default"
-            >Time</a
-          >
+            >Time for my medication</a
+          ><br />
           <h4 id="all-medications">
             <ul id="medication-list-ul" class="uk-list uk-list-striped"></ul>
           </h4>
         </div>
 
-        <br /><br />
+        <br /><br /><br /><br />
 
         <div id="add-prescription">
           <a
@@ -70,7 +70,16 @@
             uk-icon="icon: plus-circle; ratio: 3.5"
             uk-tooltip="Add new prescription"
           ></a>
+          <button id="pill-identifier">
+            <a
+              class="uk-link-muted"
+              href="https://healthtools.aarp.org/pill-identifier"
+              target="_blank"
+              >Pill identifier</a
+            >
+          </button>
         </div>
+
         <br />
       </div>
 

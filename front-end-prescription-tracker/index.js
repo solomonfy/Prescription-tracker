@@ -104,7 +104,7 @@ function renderAllPrescriptions(prescriptions) {
   if (prescriptions.every(checkPrescription)) {
 
     wellDoneTag.style.display = "block"
-    wellDoneTag.innerText = "You are done for today's medication"
+    wellDoneTag.innerText = "You are done for today: click refresh to set for tomorrow"
   }
 
   for (const prescription of prescriptions) {
@@ -231,8 +231,8 @@ function displayPrescription(prescription) {
   } else {
     const medTakenUl = document.querySelector("ul.taken-medication");
     const h3 = document.createElement("h3");
-    const medTakenLi = document.createElement("li");
-    medTakenLi.className = "uk-text-success"
+    const medTakenLi = document.createElement("p");
+    medTakenLi.className = "uk-text-success uk-text-large"
 
     medTakenUl.append(medTakenLi);
     // medTakenUl.append(h3);
@@ -271,7 +271,7 @@ function displayPrescription(prescription) {
 
     medNameTag.innerText =
       prescription.medication_name + " " + prescription.medication_strength;
-    medImprintTag.innerText = prescription.medication_imprint;
+    medImprintTag.innerText = "Imprint: " + prescription.medication_imprint;
 
     medImage.src = prescription.medication_image;
     medPrecauTag.innerText = prescription.medication_precaution;
@@ -287,7 +287,8 @@ function displayPrescription(prescription) {
     polaroidDiv.append(
 
       closeButton,
-
+      breakTag,
+      breakTag,
       medImage,
       medImprintTag,
       medNameTag,
