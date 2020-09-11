@@ -99,9 +99,18 @@ function fetchData() {
 }
 
 function renderAllPrescriptions(prescriptions) {
+
+  const checkPrescription = (prescription => prescription.prescription_taken === true);
+  if (prescriptions.every(checkPrescription)) {
+
+    wellDoneTag.style.display = "block"
+    wellDoneTag.innerText = "You are done for today's medication"
+  }
+
   for (const prescription of prescriptions) {
     displayPrescription(prescription);
   }
+
 }
 
 
@@ -224,10 +233,6 @@ function displayPrescription(prescription) {
     const h3 = document.createElement("h3");
     const medTakenLi = document.createElement("li");
     medTakenLi.className = "uk-text-success"
-
-    wellDoneTag.style.display = "block"
-    wellDoneTag.innerText = "You are done for today's medication"
-
 
     medTakenUl.append(medTakenLi);
     // medTakenUl.append(h3);
