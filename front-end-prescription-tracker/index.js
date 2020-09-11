@@ -102,9 +102,9 @@ function renderAllPrescriptions(prescriptions) {
 
   const checkPrescription = (prescription => prescription.prescription_taken === true);
   if (prescriptions.every(checkPrescription)) {
-
     wellDoneTag.style.display = "block"
     wellDoneTag.innerText = "You are done for today: click refresh to set for tomorrow"
+    document.querySelector("#time-for-medication-p-tag").innerHTML = ""
   }
 
   for (const prescription of prescriptions) {
