@@ -246,14 +246,11 @@ function displayPrescription(prescription) {
     medDiv.append(containerDiv);
     containerDiv.innerHTML = "";
     const polaroidDiv = document.createElement("div");
-    // polaroidDiv.className = "polaroid";
-    // polaroidDiv.classList.add("polaroid", "uk-alert");
-    // polaroidDiv.innerHTML = polaroidDiv.innerHTML + uk-alert
+    polaroidDiv.className = "polaroid";
 
-    // polaroidDiv.innerHTML = ` uk-alert=""`;
+    polaroidDiv.setAttribute("uk-alert", "");
 
-    // containerDiv.append(polaroidDiv);
-    // polaroidDiv.innerHTML = "";
+    containerDiv.append(polaroidDiv);
 
     const medNameTag = document.createElement("h2");
     const medImprintTag = document.createElement("h2");
@@ -261,6 +258,11 @@ function displayPrescription(prescription) {
     medImage.className = "medication-image";
     const medPrecauTag = document.createElement("h2");
     const medFrequencyAndDoseTag = document.createElement("h2");
+
+    const closeButton = document.createElement("a");
+    closeButton.classList.add("uk-alert-close", "uk-close-large");
+    closeButton.id = "close-btn"
+    closeButton.setAttribute("uk-close", "");
 
     medNameTag.innerText =
       prescription.medication_name + " " + prescription.medication_strength;
@@ -278,13 +280,16 @@ function displayPrescription(prescription) {
       prescription.frequency;
 
     polaroidDiv.append(
+
+      closeButton,
+
       medImage,
       medImprintTag,
       medNameTag,
       medPrecauTag,
       medFrequencyAndDoseTag
     );
-    containerDiv.append(medNameTag, medImprintTag, medImage, medPrecauTag, medFrequencyAndDoseTag);
+    // containerDiv.append(medNameTag, medImprintTag, medImage, medPrecauTag);
   });
 }
 
